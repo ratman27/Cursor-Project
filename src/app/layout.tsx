@@ -1,5 +1,4 @@
 import "./globals.css";
-import { AuthProvider } from "../lib/contexts/AuthContext";
 import ProfileButton from "./components/ProfileButton";
 
 export default function RootLayout({
@@ -12,7 +11,7 @@ export default function RootLayout({
       <body className="bg-gray-50 min-h-screen font-sans">
         <ProfileButton />
         <div className="min-h-screen flex flex-col items-center justify-start w-full">
-          <AuthProvider>{children}</AuthProvider>
+          {children}
         </div>
       </body>
     </html>
