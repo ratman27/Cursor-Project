@@ -11,6 +11,7 @@ import {
   doc,
   updateDoc,
   deleteDoc,
+  getDoc,
 } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
@@ -45,6 +46,19 @@ export const updateDocument = (collectionName: string, id: string, data: any) =>
 
 export const deleteDocument = (collectionName: string, id: string) =>
   deleteDoc(doc(db, collectionName, id));
+
+// Save a report for a user
+export const saveUserReport = async (uid: string, reportData: any) => {
+  const userReportsCollection = collection(db, `users/${uid}/reports`);
+  return addDoc(userReportsCollection, reportData);
+};
+
+// Fetch all reports for a user
+export const getUserReports = async (uid: string) => {
+  const userReportsCollection = collection(db, `users/${uid}/reports`);
+  const querySnapshot = await getDocs(userReportsCollection);
+  return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+};
 
 // Storage functions
 export const uploadFile = async (file: File, path: string) => {
