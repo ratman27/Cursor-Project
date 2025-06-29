@@ -50,16 +50,11 @@ export async function exportToPDF(
 
     // Capture the element as canvas
     const canvas = await html2canvas(element, {
-      scale: 2, // Higher quality
       useCORS: true,
       allowTaint: true,
-      backgroundColor: '#ffffff',
+      background: '#ffffff',
       width: element.scrollWidth,
       height: element.scrollHeight,
-      scrollX: 0,
-      scrollY: 0,
-      windowWidth: element.scrollWidth,
-      windowHeight: element.scrollHeight,
     });
 
     // Remove loading element
